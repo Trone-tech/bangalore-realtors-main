@@ -3,11 +3,17 @@
 /* Additional custom styles to override defaults */
 :root {
   --black: #000;
+  --foreground: 0 0% 95%;
+  --background: 0 0% 5%;
+  --muted-foreground: 0 0% 70%;
 }
 
 /* Dark theme styles */
 .dark {
   --black: #000;
+  --foreground: 0 0% 95%;
+  --background: 0 0% 5%;
+  --muted-foreground: 0 0% 70%;
 }
 
 body {
@@ -17,6 +23,64 @@ body {
   display: block; /* Override the flex display that might be affecting layout */
   overflow-x: hidden;
   color-scheme: dark;
+}
+
+/* Add utility classes for testimonial cards */
+.bg-background {
+  background-color: rgb(var(--background) / 100%);
+}
+
+.text-foreground {
+  color: hsl(var(--foreground));
+}
+
+.text-muted-foreground {
+  color: hsl(var(--muted-foreground));
+}
+
+/* Marquee animation styles */
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee {
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+
+.marquee-content {
+  display: flex;
+  min-width: 100%;
+  padding: 1rem 0;
+  animation: scroll 25s linear infinite;
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .marquee-content {
+    gap: 8px;
+    animation-duration: 20s;
+  }
+}
+
+.marquee-reverse .marquee-content {
+  animation-direction: reverse;
+}
+
+.marquee-pause-on-hover:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
 }
 
 /* Reset link colors to prevent default styling from affecting our design */
