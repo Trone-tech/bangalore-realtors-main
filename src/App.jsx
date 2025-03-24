@@ -1,14 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './assets/logo.png';
 import backgroundImage from './assets/buildings_image.png';
 import { Button } from './components/ui/moving-border';
 import GlowingEffectDemo from './components/glowing-effect-demo';
 
 function App() {
+  // Add state to track scroll position for fade effect
+  const [scrollPosition, setScrollPosition] = useState(0);
+  
+  // Update scroll position when user scrolls
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen w-full">
+    <div className="min-h-screen w-full relative">
       {/* Hero Section with background image */}
-      <section className="relative">
+      <section className="relative h-screen w-full flex flex-col">
         {/* Background image container with overlay */}
         <div className="absolute inset-0 z-0">
           {/* Background image */}
@@ -22,7 +37,7 @@ function App() {
         </div>
 
         {/* Hero content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col h-full">
           {/* Header with navigation */}
           <header className="flex justify-between items-center py-6">
             {/* Logo and brand name */}
@@ -32,32 +47,39 @@ function App() {
             </div>
 
             {/* Navigation links */}
-            <nav className="flex space-x-8">
+            <nav className="hidden sm:flex space-x-8">
               <a href="#about" className="text-indigo-500 hover:text-orange-400 transition font-medium">About</a>
               <a href="#contact" className="text-indigo-500 hover:text-orange-400 transition font-medium">Contact</a>
               <a href="#testimonials" className="text-indigo-500 hover:text-orange-400 transition font-medium">Testimonials</a>
             </nav>
+            
+            {/* Mobile navigation toggle - simplified version */}
+            <button className="sm:hidden text-white">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+              </svg>
+            </button>
           </header>
 
-          {/* Hero content */}
-          <div className="min-h-[70vh] flex flex-col justify-center py-16">
+          {/* Hero content - centered vertically and horizontally */}
+          <div className="flex-grow flex flex-col justify-center py-8">
             {/* Main headline */}
-            <h1 className="text-5xl sm:text-6xl font-bold text-white leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight">
               Real Estate Made Easy.
             </h1>
             
             {/* Subheading with highlighted text */}
-            <p className="mt-4 text-2xl sm:text-3xl text-white">
+            <p className="mt-4 text-xl sm:text-2xl md:text-3xl text-white">
               Buy, Sell, Rent with <span className="text-orange-500">Bangalore Realtors</span>!
             </p>
 
             {/* Action buttons with moving borders */}
-            <div className="mt-12 flex flex-wrap gap-6">
+            <div className="mt-8 sm:mt-12 flex flex-wrap gap-4 sm:gap-6">
               <Button 
                 as="a"
                 href="tel:+1234567890" 
                 className="bg-slate-900 text-white border-slate-800"
-                containerClassName="h-12 w-36"
+                containerClassName="h-10 sm:h-12 w-28 sm:w-36"
                 borderClassName="bg-[radial-gradient(#3b82f6_40%,transparent_60%)]"
               >
                 Call
@@ -66,7 +88,7 @@ function App() {
                 as="a"
                 href="https://wa.me/1234567890" 
                 className="bg-slate-900 text-white border-slate-800"
-                containerClassName="h-12 w-36"
+                containerClassName="h-10 sm:h-12 w-28 sm:w-36"
                 borderClassName="bg-[radial-gradient(#3b82f6_40%,transparent_60%)]"
               >
                 WhatsApp
@@ -75,14 +97,29 @@ function App() {
                 as="a"
                 href="#schedule" 
                 className="bg-slate-900 text-white border-slate-800"
-                containerClassName="h-12 w-36"
+                containerClassName="h-10 sm:h-12 w-28 sm:w-36"
                 borderClassName="bg-[radial-gradient(#3b82f6_40%,transparent_60%)]"
               >
                 Schedule call
               </Button>
             </div>
           </div>
+          
+          {/* Scroll indicator at the bottom */}
+          <div className="flex justify-center pb-6 animate-bounce">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 text-white">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </div>
         </div>
+        
+        {/* Fade effect transition to section 2 */}
+        <div 
+          className="absolute bottom-0 left-0 right-0 h-32 z-10 pointer-events-none" 
+          style={{ 
+            background: 'linear-gradient(to bottom, transparent, rgba(15, 23, 42, 0.3) 30%, rgba(15, 23, 42, 0.7) 70%, rgb(15, 23, 42) 100%)',
+          }}
+        ></div>
       </section>
       
       {/* Features section with glowing cards */}
