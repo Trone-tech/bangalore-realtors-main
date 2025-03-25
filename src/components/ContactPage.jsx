@@ -282,8 +282,7 @@ const ContactPage = () => {
           </div>
         </div>
       </div>
-
-      {/* Testimonials Section */}
+{/* 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-orange-500 mb-4">What Our Clients Say</h2>
@@ -292,7 +291,6 @@ const ContactPage = () => {
           </p>
         </div>
         
-        {/* Testimonials wrapper - rectangular boxes style exactly matching the image */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-0 max-w-6xl mx-auto">
           {testimonials.map((testimonial, index) => (
             <div 
@@ -311,7 +309,7 @@ const ContactPage = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       {/* Footer */}
       <footer className="bg-black py-8 px-4 sm:px-6 lg:px-8 border-t border-gray-800">
